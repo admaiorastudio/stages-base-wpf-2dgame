@@ -11,6 +11,9 @@ namespace BaseWpf2dGame.Entities
 {
     public class SampleEntity : GameEntity
     {
+        private float _speedX = 20;
+        private float _speedY = 20;
+
         public SampleEntity()
         {
 
@@ -18,7 +21,27 @@ namespace BaseWpf2dGame.Entities
 
         public override void Update()
         {
-            
+            if (this.CurrentGame.Input.HasKeyboardInput)
+            {
+                switch (this.CurrentGame.Input.KeyboardStatus.Key)
+                {
+                    case System.Windows.Input.Key.Left:
+                        this.X -= _speedX;
+                        break;
+
+                    case System.Windows.Input.Key.Right:
+                        this.X += _speedX;
+                        break;
+
+                    case System.Windows.Input.Key.Up:
+                        this.Y -= _speedY;
+                        break;
+
+                    case System.Windows.Input.Key.Down:
+                        this.Y += _speedY;
+                        break;
+                }
+            }
         }
 
         public override Shape Draw(Canvas canvas2d)

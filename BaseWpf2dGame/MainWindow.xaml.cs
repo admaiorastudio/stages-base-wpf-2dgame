@@ -31,7 +31,7 @@ namespace BaseWpf2dGame
             _game = new Game(this.Canvas);
 
             _timer = new DispatcherTimer(DispatcherPriority.Render);
-            _timer.Interval = TimeSpan.FromMilliseconds(16);
+            _timer.Interval = TimeSpan.FromMilliseconds(8);
             _timer.Tick += this.DispatcherTimer_Tick;
             _timer.Start();
         }
@@ -40,6 +40,14 @@ namespace BaseWpf2dGame
         {
             _game.Update();
             _game.Draw();
+
+            _game.Input.KeyboardStatus = null;
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            _game.Input.KeyboardStatus = e;            
         }
     }
 }

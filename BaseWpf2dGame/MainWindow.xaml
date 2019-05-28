@@ -7,10 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="53*"/>
+            <ColumnDefinition Width="211*"/>
+        </Grid.ColumnDefinitions>
         <Canvas
             x:Name="Canvas"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="Black" />
+            Background="Black" Grid.ColumnSpan="2">
+        </Canvas>
     </Grid>
 </Window>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Shapes;
 
 namespace BaseWpf2dGame
@@ -34,6 +35,20 @@ namespace BaseWpf2dGame
             _canvas2d = canvas2d;
         }
     }
+
+    public class Input
+    {
+        public KeyEventArgs KeyboardStatus
+        {
+            get;
+            set;
+        }
+
+        public bool HasKeyboardInput
+        {
+            get { return this.KeyboardStatus != null; }
+        }            
+    }
         
 
 
@@ -46,11 +61,17 @@ namespace BaseWpf2dGame
         private int _nextEntityId;
         private List<GameEntity> _entities;
 
-        public Screen Screen
+        public Input Input
         {
             get;
             private set;
         }
+
+        public Screen Screen
+        {
+            get;
+            private set;
+        }      
 
         public Game(Canvas canvas2d)
         {
@@ -59,6 +80,8 @@ namespace BaseWpf2dGame
 
             _entities = new List<GameEntity>();
             InitEntities();
+
+            this.Input = new Input();            
         }
 
         /// <summary>
@@ -67,7 +90,7 @@ namespace BaseWpf2dGame
         public void Update()
         {
             foreach (var entity in _entities)
-                entity.Update();
+                entity.Update();            
         }
 
         /// <summary>
