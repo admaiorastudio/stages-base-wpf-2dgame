@@ -18,7 +18,7 @@ namespace BaseWpf2dGame
         {
             get
             {
-                return _canvas2d.Width;
+                return _canvas2d.ActualWidth;
             }
         }
 
@@ -26,7 +26,7 @@ namespace BaseWpf2dGame
         {
             get
             {
-                return _canvas2d.Height;
+                return _canvas2d.ActualHeight;
             }
         }
 
@@ -73,6 +73,11 @@ namespace BaseWpf2dGame
             private set;
         }      
 
+        public IReadOnlyList<GameEntity> Entities
+        {
+            get { return _entities; }
+        }
+
         public Game(Canvas canvas2d)
         {
             _canvas2d = canvas2d;
@@ -104,7 +109,7 @@ namespace BaseWpf2dGame
                 Shape shape = entity.Draw(_canvas2d);
                 _canvas2d.Children.Add(shape);
                 Canvas.SetLeft(shape, entity.X);
-                Canvas.SetTop(shape, entity.Y);
+                Canvas.SetTop(shape, entity.Y);                
             }
 
         }

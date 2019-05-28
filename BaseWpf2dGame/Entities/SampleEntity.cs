@@ -42,6 +42,15 @@ namespace BaseWpf2dGame.Entities
                         break;
                 }
             }
+
+            foreach(var entity in this.CurrentGame.Entities)
+            {
+                if (entity == this)
+                    continue;
+
+                float x = entity.X;
+                float y = entity.Y;
+            }
         }
 
         public override Shape Draw(Canvas canvas2d)
