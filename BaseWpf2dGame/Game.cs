@@ -14,6 +14,23 @@ namespace BaseWpf2dGame
     {
         private Canvas _canvas2d;
 
+        public double Left
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public double Top
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+
         public double Width
         {
             get
@@ -61,6 +78,8 @@ namespace BaseWpf2dGame
         private int _nextEntityId;
         private List<GameEntity> _entities;
 
+        private bool _isInitialized;
+
         public Input Input
         {
             get;
@@ -84,8 +103,7 @@ namespace BaseWpf2dGame
             this.Screen = new Screen(canvas2d);
 
             _entities = new List<GameEntity>();
-            InitEntities();
-
+            
             this.Input = new Input();            
         }
 
@@ -94,6 +112,12 @@ namespace BaseWpf2dGame
         /// </summary>
         public void Update()
         {
+            if (!_isInitialized)
+            {
+                _isInitialized = true;
+                InitEntities();
+            }
+
             foreach (var entity in _entities)
                 entity.Update();            
         }
@@ -135,10 +159,18 @@ namespace BaseWpf2dGame
         /// Initialize here your entities
         /// </summary>
         private void InitEntities()
-        {
-            SampleEntity sampleEntity = new SampleEntity();
-            sampleEntity.Move(100, 100);
-            AddEntity(sampleEntity);
+        {            
+            Ball ball = new Ball(30, 30, 2);
+            ball.Move((float)this.Screen.Width / 2f - ball.Width / 2f, (float)this.Screen.Height / 2f - ball.Height / 2f);
+            AddEntity(ball);
+
+            Player player = new Player(PlayerNumber.Player);
+            player.Move(0, 490);
+            AddEntity(player);
+
+            Player player2 = new Player(PlayerNumber.Player2);
+            player2.Move(1890, 490);
+            AddEntity(player2);
         }
     }
 }

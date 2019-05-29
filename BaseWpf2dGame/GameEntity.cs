@@ -8,6 +8,31 @@ using System.Windows.Shapes;
 
 namespace BaseWpf2dGame
 {
+    public class Rectangle2D
+    {
+        public float X;
+        public float Y;
+
+        public float Width;
+        public float Height;
+
+        public float Left => this.X;
+        public float Top => this.Y;
+        public float Right => this.X + this.Width;
+        public float Bottom => this.Y + this.Height;
+
+        public bool Intersect(Rectangle2D rectangle2d)
+        {
+            if (this.Left < rectangle2d.Right && this.Right > rectangle2d.Left &&
+                this.Top < rectangle2d.Bottom && this.Bottom > rectangle2d.Top)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
+
     public abstract class GameEntity
     {
         public int EntityId
@@ -26,6 +51,32 @@ namespace BaseWpf2dGame
         {
             get;
             set;
+        }
+
+        public float Width
+        {
+            get;
+            set;
+        }
+
+        public float Height
+        {
+            get;
+            set;
+        }
+
+        public Rectangle2D Rectangle
+        {
+            get
+            {
+                return new Rectangle2D
+                {
+                    X = this.X,
+                    Y = this.Y,
+                    Width = this.Width,
+                    Height = this.Height
+                };
+            }
         }
 
         public Game CurrentGame
